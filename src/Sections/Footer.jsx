@@ -21,25 +21,36 @@ export default function Footer({
         <div className='flex mb-4'>
           <img src={InstagramIcon} />
           <div className='text-xl ml-4 text-secondaryTextColor cursor-pointer hover:underline phone:text-sm'>
-            johnnndewey
+            <a href='https://www.instagram.com/johnnndewey/' target='_blank'>
+              johnnndewey
+            </a>
           </div>
         </div>
         <div className='flex mb-4'>
           <img src={FacebookIcon} />
           <div className='text-xl ml-4 text-secondaryTextColor cursor-pointer hover:underline phone:text-sm'>
-            johndewey.altura1
+            <a
+              href='https://www.facebook.com/johndewey.altura1/'
+              target='_blank'
+            >
+              johndewey.altura1
+            </a>
           </div>
         </div>
         <div className='flex mb-4'>
           <img src={TwitterIcon} />
           <div className='text-xl ml-4 text-secondaryTextColor cursor-pointer hover:underline phone:text-sm'>
-            @johnnmyyyy
+            <a href='https://twitter.com/johnnmyyyy' target='_blank'>
+              @johnnmyyyy
+            </a>
           </div>
         </div>
         <div className='flex mb-4'>
           <img src={GithubIcon} />
           <div className='text-xl ml-4 text-secondaryTextColor cursor-pointer hover:underline phone:text-sm'>
-            johndeweyzxc
+            <a href='https://github.com/johndeweyzxc' target='_blank'>
+              johndeweyzxc
+            </a>
           </div>
         </div>
       </div>
