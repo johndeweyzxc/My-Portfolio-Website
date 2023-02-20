@@ -5,7 +5,6 @@ import About from "./Sections/About";
 import MySkillSets from "./Sections/MySkillSets";
 import ContactMe from "./Sections/ContactMe";
 import Footer from "./Sections/Footer";
-
 import {useRef} from "react";
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
 
   return (
     <div className='w-screen'>
-      <img src={WholeName} className='absolute mt-56 ml-16 laptop:hidden' />
+      <img src={WholeName} className='absolute mt-56 ml-12 laptop:hidden' />
 
       <Header
         aboutRef={aboutRef}
