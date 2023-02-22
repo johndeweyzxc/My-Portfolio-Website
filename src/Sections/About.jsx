@@ -1,7 +1,11 @@
 import PageIndicator1 from "../assets/About/PageIndicator1.png";
 import {initializeApp} from "firebase/app";
-import {collection, getCountFromServer, getFirestore} from "firebase/firestore";
-import {addDoc} from "firebase/firestore";
+import {
+  collection,
+  getCountFromServer,
+  getFirestore,
+  addDoc,
+} from "firebase/firestore";
 import {useEffect, useState, useRef} from "react";
 import {
   API_KEY,
@@ -30,11 +34,16 @@ export default function About({aboutRef, footerRef}) {
   const [totalVisitor, setTotalVisitor] = useState(0);
   const dataFetchedRef = useRef(false);
 
-  const sendIpInformation = async (countryCode, region, ip) => {
+  const sendIpInformation = async (countryCode, region, ip, isp) => {
+    const currentDate = new Date();
+
     await addDoc(collection(db, TRAFFIC_INFO_REF + VISITORS_COL), {
       ip: ip,
       countryCode: countryCode,
       region: region,
+      isp: isp,
+      timeStamp: currentDate.toString(),
+      userAgent: window.navigator.userAgent,
     });
   };
 
@@ -42,7 +51,7 @@ export default function About({aboutRef, footerRef}) {
     fetch("http://ip-api.com/json/")
       .then((response) => response.json())
       .then((data) => {
-        sendIpInformation(data.countryCode, data.region, data.query);
+        sendIpInformation(data.countryCode, data.region, data.query, data.isp);
       });
   };
 
