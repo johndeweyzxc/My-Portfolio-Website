@@ -34,7 +34,7 @@ export default function About({aboutRef, footerRef}) {
   const [totalVisitor, setTotalVisitor] = useState(0);
   const dataFetchedRef = useRef(false);
 
-  const sendIpInformation = async (countryCode, region, ip, isp) => {
+  const saveIpInformation = async (countryCode, region, ip, isp) => {
     const currentDate = new Date();
 
     await addDoc(collection(db, TRAFFIC_INFO_REF + VISITORS_COL), {
@@ -48,10 +48,22 @@ export default function About({aboutRef, footerRef}) {
   };
 
   const getIpInformation = async () => {
-    fetch("http://ip-api.com/json/")
-      .then((response) => response.json())
-      .then((data) => {
-        sendIpInformation(data.countryCode, data.region, data.query, data.isp);
+    // Get the ip address of the client
+    fetch("https://api.ipify.org/?format=json")
+      .then((responseIp) => responseIp.json())
+      .then((clientIp) => {
+        // Then fetch information about the ip to determine where it come from
+        // and  the name of its internet service provider.
+        fetch(`https://ip-api-lyart.vercel.app/${clientIp.ip}/${Date()}`)
+          .then((responseIpInfo) => responseIpInfo.json())
+          .then((clientIpInfo) => {
+            saveIpInformation(
+              clientIpInfo.countryCode,
+              clientIpInfo.region,
+              clientIpInfo.ip,
+              clientIpInfo.isp
+            );
+          });
       });
   };
 

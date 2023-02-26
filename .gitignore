@@ -24,4 +24,7 @@ dist-ssr
 *.sw?
 
 src/apikey.js
+.firebase
 firebase
+.firebaserc
+firebase.json
