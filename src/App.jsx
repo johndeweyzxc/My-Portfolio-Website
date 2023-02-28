@@ -49,6 +49,7 @@ function App() {
   const saveIpInformation = async (countryCode, region, ip, isp) => {
     const currentDate = new Date();
 
+    // Save the ip information from the client in firestore database
     await addDoc(collection(db, TRAFFIC_INFO_REF + VISITORS_COL), {
       ip: ip,
       countryCode: countryCode,
@@ -60,12 +61,12 @@ function App() {
   };
 
   const getIpInformation = async () => {
-    // Get the ip address of the client\
+    // Get the ip address of the client
     fetch("https://api.ipify.org/?format=json")
       .then((responseIp) => responseIp.json())
       .then((clientIp) => {
         // Then fetch information about the ip to determine where it come from
-        // and  the name of its internet service provider.
+        // and the name of its internet service provider.
         fetch(`https://ip-api-lyart.vercel.app/${clientIp.ip}/${Date()}`)
           .then((responseIpInfo) => responseIpInfo.json())
           .then((clientIpInfo) => {
@@ -79,6 +80,7 @@ function App() {
       });
   };
 
+  // Get the total number of visits from the website
   const getTotalNumberOfVisitors = async () => {
     const visitorCollection = collection(db, TRAFFIC_INFO_REF + VISITORS_COL);
     const snapshot = await getCountFromServer(visitorCollection);
